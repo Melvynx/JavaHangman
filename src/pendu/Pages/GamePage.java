@@ -90,9 +90,21 @@ public class GamePage extends JPanel {
                 .addKeyEventDispatcher(new KeyEventDispatcher() {
                     @Override
                     public boolean dispatchKeyEvent(KeyEvent e) {
+                        if(gameWine){
+                            return false;
+                        }
                         if(e.getID() == KeyEvent.KEY_RELEASED){
-                            new ButtonLettersListener(e.getKeyChar()).click();
-                            System.out.println("Got key event!" + e.getKeyChar());
+                            for(int y = 0; y<lettersOfButton.length; y++){
+                                if(e.getKeyChar() == lettersOfButton[y].toLowerCase().charAt(0)){
+                                    new ButtonLettersListener(e.getKeyChar()).click();
+                                    System.out.println("Got key event!" + e.getKeyChar());
+                                    for(int i = 0; i<buttonsLetters.length; i++){
+                                        if(buttonsLetters[i].getText().toLowerCase().charAt(0) == e.getKeyChar()){
+                                            buttonsLetters[i].setEnabled(false);
+                                        }
+                                    }
+                                }
+                            }
                         }
                         return false;
                     }
@@ -176,6 +188,7 @@ public class GamePage extends JPanel {
         public void actionPerformed(ActionEvent e) {
             click();
             ((JButton)e.getSource()).setEnabled(false);
+
         }
 
         public void click() {
