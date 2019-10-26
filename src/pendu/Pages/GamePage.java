@@ -20,7 +20,10 @@ public class GamePage extends JPanel {
     String[] lettersOfButton = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     //Un bouton par élément à afficher
     JButton[] buttonsLetters = new JButton[lettersOfButton.length];
-    JButton continueButton = new JButton("Continuer");
+    
+    JButton scorePageButton = new JButton("Voir les scores");
+    JButton restartButton = new JButton("Relancer !");
+    
     //JMenuItem[] itemLetters = new JMenuItem[lettersOfButton.length];
 
     JLabel countWordLabel = new JLabel("Nombre de mot trouvé : ");
@@ -40,12 +43,13 @@ public class GamePage extends JPanel {
 
     Integer counterTry = 0;
 
-    boolean gameWine = false;
+    boolean gameFinish = false;
 
     String nameUser = "";
     int scoreUser = 0;
 
     public GamePage(Navigation navigation) {
+        countScoreLabel.setText("Votre score actuel est de :"+ navigation.getPointPlayer());
         initComponent();
         initRandomWord();
         component.setLayout(new GridLayout(1, 2));
@@ -53,12 +57,16 @@ public class GamePage extends JPanel {
         component.add(componentImage, BorderLayout.EAST);
         this.add(component);
 
-        continueButton.addActionListener(new ActionListener() {
+        scorePageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(gameWine)
-                    navigation.setPage(3);
-                else
-                    navigation.setPage(1);
+                navigation.setPage(3);
+                navigation.resetPointPlay();
+            }
+        });
+        restartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(2);
+                navigation.resetPointPlay();
             }
         });
     }
@@ -66,9 +74,14 @@ public class GamePage extends JPanel {
     public void initComponent() {
         penduImage.setIndexSet(imageChoose);
         componentImage.add(penduImage, BorderLayout.CENTER);
-        componentImage.add(continueButton, BorderLayout.SOUTH);
+        JPanel componentButton = new JPanel(new GridLayout(1,2));
+        componentButton.add(scorePageButton);
+        componentButton.add(restartButton);
+        componentImage.add(componentButton, BorderLayout.SOUTH);
+
         componentLetters.setLayout(new GridLayout(4, 7));
-        continueButton.setVisible(false);
+        scorePageButton.setVisible(false);
+        restartButton.setVisible(false);
         Dimension dimButtonLetter = new Dimension(30, 30);
         for (int i = 0; i < lettersOfButton.length; i++) {
             buttonsLetters[i] = new JButton(lettersOfButton[i]);
@@ -90,7 +103,7 @@ public class GamePage extends JPanel {
                 .addKeyEventDispatcher(new KeyEventDispatcher() {
                     @Override
                     public boolean dispatchKeyEvent(KeyEvent e) {
-                        if(gameWine){
+                        if(gameFinish){
                             return false;
                         }
                         if(e.getID() == KeyEvent.KEY_RELEASED){
@@ -101,6 +114,7 @@ public class GamePage extends JPanel {
                                     for(int i = 0; i<buttonsLetters.length; i++){
                                         if(buttonsLetters[i].getText().toLowerCase().charAt(0) == e.getKeyChar()){
                                             buttonsLetters[i].setEnabled(false);
+
                                         }
                                     }
                                 }
@@ -218,21 +232,28 @@ public class GamePage extends JPanel {
                 } else {
                     StringBuilder wordCorrect = new StringBuilder();
                     //SI le joueurs à perdu
+                    //Image
                     System.out.println("Game finish");
-                    imageChoose = 8;
+                    imageChoose = 10;
                     penduImage.setIndexSet(imageChoose);
                     penduImage.repaint();
                     wordToFind.setForeground(Color.red);
-
+                    //Changement de text
                     countMistake.setForeground(Color.red);
                     countMistake.setText("PERDU");
+                    //create the correct word
                     for (int i = 0; i < randomWord.size(); i++)
                         wordCorrect.append(randomWord.get(i));
+                    wordToFind.setText(wordCorrect.toString());
+                    //Do false all button
                     for (int i = 0; i<lettersOfButton.length; i++)
                         buttonsLetters[i].setEnabled(false);
-
-                    wordToFind.setText(wordCorrect.toString());
-                    continueButton.setVisible(true);
+                    
+                    
+                    
+                    
+                    
+                    scorePageButton.setVisible(true);
                 }
             }
             for (int i = 0; i<randomLetterFind.size(); i++){
@@ -243,31 +264,37 @@ public class GamePage extends JPanel {
                 wordToFind.setForeground(Color.green);
                 countMistake.setForeground(Color.green);
                 countMistake.setText("GAGNEZ");
-
+                imageChoose = 11;
+                penduImage.setIndexSet(imageChoose);
+                penduImage.repaint();
                 for (int i = 0; i<lettersOfButton.length; i++)
                     buttonsLetters[i].setEnabled(false);
 
-                continueButton.setVisible(true);
 
-                gameWine = true;
-
-                JOptionPane answerName = new JOptionPane();
-                nameUser = answerName.showInputDialog(null, "Veuillez décliné votre identité !", "Gendarmerie National", JOptionPane.QUESTION_MESSAGE);
-                writeNewScore();
             }
             System.out.println(newWordToDisplay);
         }
     }
     private void writeNewScore() {
         try {
-            String formatText = nameUser + ":" + scoreUser+"\n";
-            PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
-            pw.write(formatText);
-            pw.close();
+            if (nameUser != null){
+                String formatText = nameUser + ":" + scoreUser+"\n";
+                PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
+                pw.write(formatText);
+                pw.close();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void partieFinish(){
+
+        gameFinish = true;
+
+        JOptionPane answerName = new JOptionPane();
+        nameUser = answerName.showInputDialog(null, "Inscrivez votre pseudo !", "Meilleurs Score", JOptionPane.QUESTION_MESSAGE);
+        writeNewScore();
     }
 }

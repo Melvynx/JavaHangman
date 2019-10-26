@@ -13,14 +13,14 @@ public class Window extends JFrame implements Navigation {
     JMenu fillMenu = new JMenu("Fichier"), aboutMenu = new JMenu("A propos");
     JMenuItem newMenu = new JMenuItem("Nouveau"), scoreMenu = new JMenuItem("Score"), rulesMenu = new JMenuItem("Règle"), aboutItemMenu = new JMenuItem("A propos");
 
-
+    int pointPlayer = 10;
 
     HomePage homePage = new HomePage(this);
     RulesPages rulesPages = new RulesPages(this);
     GamePage gamePage = new GamePage(this);
     ScorePage scorePage = new ScorePage(this);
 
-    Window() throws IOException {
+    Window() {
 
         this.setTitle("PENDU");
         this.setSize(1000, 800);
@@ -93,6 +93,16 @@ public class Window extends JFrame implements Navigation {
         if (pages > 3) {
             System.out.println("Erreur: ["+pages+"] n'est pas définit.(Définit entre 0 et 3)");
         }
+    }
+
+    public int getPointPlayer() {
+        return pointPlayer;
+    }
+    public void addPointPlayer(int point){
+        pointPlayer+=point;
+    }
+    public void resetPointPlay(){
+        pointPlayer = 0;
     }
 }
 
