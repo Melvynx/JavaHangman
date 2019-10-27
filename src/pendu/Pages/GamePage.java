@@ -106,7 +106,7 @@ public class GamePage extends JPanel {
         componentButton.add(scorePageButton);
         componentButton.add(restartButton);
         componentButton.add(stopButton);
-        componentButton.add(homePage)
+        componentButton.add(homePage);
         componentButton.setPreferredSize(new Dimension(400,50));
         componentImage.add(componentButton, BorderLayout.SOUTH);
 

@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4c3668e7-387c-459a-8e9a-5a07cd76f945" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file/dictionnaire.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/dictionnaire.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file/score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/score.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pendu/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Window.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Create_Game" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SeWzfgg0mntdmd4qDRjKtPaqas" />
@@ -63,6 +62,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Pendu" />
         <item itemvalue="Application.Pendu" />
       </list>
     </recent_temporary>
