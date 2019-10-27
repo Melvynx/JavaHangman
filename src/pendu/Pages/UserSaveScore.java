@@ -2,20 +2,17 @@ package pendu.Pages;
 
 import java.io.Serializable;
 
-public class userSaveScore implements Serializable {
+public class UserSaveScore implements Serializable {
     private String name;
     private int score;
-    public userSaveScore(String name, int score) {
+    public UserSaveScore(String name, int score) {
         this.name = name;
         this.score = score;
     }
 
     @Override
     public String toString() {
-        return "userSaveScore{" +
-                "name='" + name + '\'' +
-                ", score=" + score +
-                '}';
+        return this.name+" à eu "+this.score+" point !";
     }
 
     public int getScore() {

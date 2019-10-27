@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c3668e7-387c-459a-8e9a-5a07cd76f945" name="Default Changelist" comment="" />
+    <list default="true" id="4c3668e7-387c-459a-8e9a-5a07cd76f945" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/dictionnaire.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/dictionnaire.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/score.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Window.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,10 +85,23 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pendu/Pages/GamePage.java</url>
+          <line>266</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

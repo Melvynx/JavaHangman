@@ -17,35 +17,43 @@ import java.util.LinkedList;
 
 public class GamePage extends JPanel {
 
-    String[] lettersOfButton = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    private String[] lettersOfButton = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     //Un bouton par élément à afficher
-    JButton[] buttonsLetters = new JButton[lettersOfButton.length];
-    JButton continueButton = new JButton("Continuer");
+    private JButton[] buttonsLetters = new JButton[lettersOfButton.length];
+
+    private JButton scorePageButton = new JButton("Voir les scores");
+    private JButton homePage = new JButton("Retours menu");
+    private JButton restartButton = new JButton("Continuer !");
+    private JButton stopButton = new JButton("Arrêter !");
+    private JButton savePoint = new JButton("Not see");
+    
     //JMenuItem[] itemLetters = new JMenuItem[lettersOfButton.length];
 
-    JLabel countWordLabel = new JLabel("Nombre de mot trouvé : ");
-    JLabel countScoreLabel = new JLabel("Votre score actuel est de : ");
-    JLabel countMistake = new JLabel("Vous avez effectuez 0 fautes.");
-    JLabel wordToFind = new JLabel("xxxxxx");
-    ImagePanel penduImage = new ImagePanel();
-    Integer imageChoose = 1;
+    private JLabel countWordLabel = new JLabel("Nombre de mot trouvé : ");
+    private JLabel countScoreLabel = new JLabel("Votre score actuel est de : ");
+    private JLabel countMistake = new JLabel("Vous avez effectuez 0 fautes.");
+    private JLabel wordToFind = new JLabel("xxxxxx");
+    private ImagePanel penduImage = new ImagePanel();
+    private Integer imageChoose = 1;
 
-    LinkedList<Character> randomWord = new LinkedList<>();
-    LinkedList<Character> randomLetterFind = new LinkedList<>();
+    private LinkedList<Character> randomWord = new LinkedList<>();
+    private LinkedList<Character> randomLetterFind = new LinkedList<>();
 
-    JPanel component = new JPanel();
-    JPanel componentWord = new JPanel();
-    JPanel componentLetters = new JPanel();
-    JPanel componentImage = new JPanel(new BorderLayout());
+    private JPanel component = new JPanel();
+    private JPanel componentWord = new JPanel();
+    private JPanel componentLetters = new JPanel();
+    private JPanel componentImage = new JPanel(new BorderLayout());
 
-    Integer counterTry = 0;
+    private Integer counterTry = 0;
 
-    boolean gameWine = false;
+    boolean gameFinish = false;
 
-    String nameUser = "";
-    int scoreUser = 0;
+    private String nameUser = "";
+    private int scoreUser = 0;
+    private int pointPlayer = 0;
 
     public GamePage(Navigation navigation) {
+        countScoreLabel.setText("Votre score actuel est de :"+ navigation.getPointPlayer());
         initComponent();
         initRandomWord();
         component.setLayout(new GridLayout(1, 2));
@@ -53,22 +61,59 @@ public class GamePage extends JPanel {
         component.add(componentImage, BorderLayout.EAST);
         this.add(component);
 
-        continueButton.addActionListener(new ActionListener() {
+        scorePageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(gameWine)
-                    navigation.setPage(3);
-                else
-                    navigation.setPage(1);
+                navigation.setPage(3);
+                navigation.resetPointPlay();
             }
         });
+        restartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(2);
+            }
+        });
+        stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane optionToStop = new JOptionPane();
+                int option = optionToStop.showOptionDialog(null, "Voulez-vous vraiment arrêter votre partie ?", "Arrêt de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (option == JOptionPane.YES_OPTION){
+                    System.out.println(pointPlayer);
+                    if (scoreUser > 1){
+                        partieFinish();
+                        scorePageButton.setVisible(true);
+                        homePage.setVisible(true);
+                        navigation.resetPointPlay();
+                    } else {
+                        navigation.setPage(0);
+                    }
+                }
+            }
+        });
+        savePoint.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.addPointPlayer(pointPlayer);
+                System.out.println(navigation.getPointPlayer());
+                scoreUser = navigation.getPointPlayer();
+            }
+        });
+        scoreUser = navigation.getPointPlayer();
     }
 
     public void initComponent() {
         penduImage.setIndexSet(imageChoose);
         componentImage.add(penduImage, BorderLayout.CENTER);
-        componentImage.add(continueButton, BorderLayout.SOUTH);
+        JPanel componentButton = new JPanel(new GridLayout(1,2));
+        componentButton.add(scorePageButton);
+        componentButton.add(restartButton);
+        componentButton.add(stopButton);
+        componentButton.add(homePage)
+        componentButton.setPreferredSize(new Dimension(400,50));
+        componentImage.add(componentButton, BorderLayout.SOUTH);
+
         componentLetters.setLayout(new GridLayout(4, 7));
-        continueButton.setVisible(false);
+        scorePageButton.setVisible(false);
+        restartButton.setVisible(false);
+        homePage.setVisible(false);
         Dimension dimButtonLetter = new Dimension(30, 30);
         for (int i = 0; i < lettersOfButton.length; i++) {
             buttonsLetters[i] = new JButton(lettersOfButton[i]);
@@ -90,18 +135,19 @@ public class GamePage extends JPanel {
                 .addKeyEventDispatcher(new KeyEventDispatcher() {
                     @Override
                     public boolean dispatchKeyEvent(KeyEvent e) {
-                        if(gameWine){
-                            return false;
-                        }
-                        if(e.getID() == KeyEvent.KEY_RELEASED){
-                            for(int y = 0; y<lettersOfButton.length; y++){
-                                if(e.getKeyChar() == lettersOfButton[y].toLowerCase().charAt(0)){
-                                    new ButtonLettersListener(e.getKeyChar()).click();
-                                    System.out.println("Got key event!" + e.getKeyChar());
-                                    for(int i = 0; i<buttonsLetters.length; i++){
-                                        if(buttonsLetters[i].getText().toLowerCase().charAt(0) == e.getKeyChar()){
-                                            buttonsLetters[i].setEnabled(false);
+                        if(!gameFinish){
+                            if(e.getID() == KeyEvent.KEY_RELEASED){
+                                for(int y = 0; y<lettersOfButton.length; y++){
+                                    if(e.getKeyChar() == lettersOfButton[y].toLowerCase().charAt(0)){
+                                        for(int i = 0; i<buttonsLetters.length; i++){
+                                            if(buttonsLetters[i].getText().toLowerCase().charAt(0) == e.getKeyChar()){
+                                                if(buttonsLetters[i].isEnabled())
+                                                    new ButtonLettersListener(e.getKeyChar()).click();
+
+                                                buttonsLetters[i].setEnabled(false);
+                                            }
                                         }
+
                                     }
                                 }
                             }
@@ -186,8 +232,10 @@ public class GamePage extends JPanel {
         }
 
         public void actionPerformed(ActionEvent e) {
-            click();
-            ((JButton)e.getSource()).setEnabled(false);
+            if (!gameFinish){
+                click();
+                ((JButton)e.getSource()).setEnabled(false);
+            }
 
         }
 
@@ -218,21 +266,30 @@ public class GamePage extends JPanel {
                 } else {
                     StringBuilder wordCorrect = new StringBuilder();
                     //SI le joueurs à perdu
-                    System.out.println("Game finish");
-                    imageChoose = 8;
+                    //Image
+                    imageChoose = 10;
                     penduImage.setIndexSet(imageChoose);
                     penduImage.repaint();
                     wordToFind.setForeground(Color.red);
-
+                    //Changement de text
                     countMistake.setForeground(Color.red);
                     countMistake.setText("PERDU");
+                    //create the correct word
                     for (int i = 0; i < randomWord.size(); i++)
                         wordCorrect.append(randomWord.get(i));
+                    wordToFind.setText(wordCorrect.toString());
+                    //Do false all button
                     for (int i = 0; i<lettersOfButton.length; i++)
                         buttonsLetters[i].setEnabled(false);
+                    
+                    if(scoreUser > 1){
+                        getPoint(counterTry);
+                        partieFinish();
+                    }
 
-                    wordToFind.setText(wordCorrect.toString());
-                    continueButton.setVisible(true);
+
+                    scorePageButton.setVisible(true);
+                    restartButton.setVisible(true);
                 }
             }
             for (int i = 0; i<randomLetterFind.size(); i++){
@@ -243,31 +300,69 @@ public class GamePage extends JPanel {
                 wordToFind.setForeground(Color.green);
                 countMistake.setForeground(Color.green);
                 countMistake.setText("GAGNEZ");
-
+                imageChoose = 11;
+                penduImage.setIndexSet(imageChoose);
+                penduImage.repaint();
                 for (int i = 0; i<lettersOfButton.length; i++)
                     buttonsLetters[i].setEnabled(false);
 
-                continueButton.setVisible(true);
+                getPoint(counterTry);
+                gameFinish = true;
 
-                gameWine = true;
-
-                JOptionPane answerName = new JOptionPane();
-                nameUser = answerName.showInputDialog(null, "Veuillez décliné votre identité !", "Gendarmerie National", JOptionPane.QUESTION_MESSAGE);
-                writeNewScore();
+                restartButton.setVisible(true);
             }
-            System.out.println(newWordToDisplay);
         }
     }
     private void writeNewScore() {
         try {
-            String formatText = nameUser + ":" + scoreUser+"\n";
-            PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
-            pw.write(formatText);
-            pw.close();
+            if (nameUser != null){
+                String formatText = nameUser + ":" + scoreUser+"\n";
+                PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
+                pw.write(formatText);
+                pw.close();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void partieFinish(){
+
+        gameFinish = true;
+
+        JOptionPane answerName = new JOptionPane();
+        nameUser = answerName.showInputDialog(null, "Inscrivez votre pseudo !", "Meilleurs Score", JOptionPane.QUESTION_MESSAGE);
+        writeNewScore();
+    }
+    private void getPoint(Integer countLose){
+        switch (countLose){
+            case 0:
+                pointPlayer = 100;
+                break;
+            case 1:
+                pointPlayer = 50;
+                break;
+            case 2:
+                pointPlayer = 40;
+                break;
+            case 3:
+                pointPlayer = 25;
+                break;
+            case 4:
+                pointPlayer = 15;
+                break;
+            case 5:
+                pointPlayer = 10;
+                break;
+            case 6:
+                pointPlayer = 5;
+                break;
+            default:
+                pointPlayer = 0;
+                break;
+        }
+        System.out.println(pointPlayer);
+        savePoint.doClick();
     }
 }

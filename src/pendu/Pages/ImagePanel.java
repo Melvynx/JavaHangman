@@ -12,7 +12,7 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel() {
         try {
-            image = new Image[]{ImageIO.read(new File("images/initial.jpg")), ImageIO.read(new File("images/try1.jpg")), ImageIO.read(new File("images/try2.jpg")), ImageIO.read(new File("images/try3.jpg")), ImageIO.read(new File("images/try4.jpg")), ImageIO.read(new File("images/try5.jpg")), ImageIO.read(new File("images/try6.jpg")), ImageIO.read(new File("images/try7.jpg")), ImageIO.read(new File("images/try8.jpg")),};
+            image = new Image[]{ImageIO.read(new File("images/initial.jpg")), ImageIO.read(new File("images/try1.jpg")), ImageIO.read(new File("images/try2.jpg")), ImageIO.read(new File("images/try3.jpg")), ImageIO.read(new File("images/try4.jpg")), ImageIO.read(new File("images/try5.jpg")), ImageIO.read(new File("images/try6.jpg")), ImageIO.read(new File("images/try7.jpg")), ImageIO.read(new File("images/try8.jpg")),ImageIO.read(new File("images/lose.png")),ImageIO.read(new File("images/looser.jpeg")),ImageIO.read(new File("images/gagner.png")),};
         } catch (IOException e) {
 
         }
@@ -23,7 +23,6 @@ public class ImagePanel extends JPanel {
         int x = (this.getWidth() - image[indexSet].getWidth(null)) / 2;
         int y = (this.getHeight() - image[indexSet].getHeight(null)) / 2;
         g2d.drawImage(image[indexSet], x, y, null);
-        System.out.println("Paint picture :"+image[indexSet].getSource());
     }
 
     public void setIndexSet(Integer indexSet) {

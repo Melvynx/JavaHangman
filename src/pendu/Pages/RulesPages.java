@@ -7,17 +7,46 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RulesPages extends JPanel {
     JLabel title = new JLabel();
     JLabel textCenter = new JLabel();
 
 
+
     public RulesPages(Navigation navigation) {
         createJLabel();
+
+        JButton restartButton = new JButton("Commencez !");
+        JButton homePage = new JButton("High score !");
+        JPanel contentSouth = new JPanel(new GridLayout(1,2));
+        JPanel buttonPanel = new JPanel();
+        restartButton.setPreferredSize(new Dimension(200, 75));
+        homePage.setPreferredSize(new Dimension(200, 75));
+        buttonPanel.setPreferredSize(new Dimension(400, 100));
+        buttonPanel.add(restartButton);
+        buttonPanel.add(homePage);
+
+        contentSouth.add(buttonPanel, BorderLayout.SOUTH);
+
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(textCenter, BorderLayout.CENTER);
+        this.add(contentSouth, BorderLayout.SOUTH);
+
+
+        restartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(2);
+            }
+        });
+        homePage.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(3);
+            }
+        });
     }
     public void createJLabel() {
         Font fontStyleText = new Font("Chalkboard", Font.LAYOUT_LEFT_TO_RIGHT, 20);
