@@ -25,6 +25,7 @@ public class HomePage extends JPanel {
     private ImagePanel imagePendu = new ImagePanel();
     private TextPanel panText = new TextPanel();
     private JButton buttonToStart = new JButton("Commencez !");
+    private JButton rulesPages = new JButton("Règles");
 
 
 
@@ -38,7 +39,16 @@ public class HomePage extends JPanel {
         createJLabel();
         contentSouth.setLayout(new BorderLayout());
         contentSouth.add(textSouth, BorderLayout.CENTER);
-        contentSouth.add(buttonToStart, BorderLayout.SOUTH);
+
+        JPanel buttonPanel = new JPanel();
+        buttonToStart.setPreferredSize(new Dimension(200, 75));
+        rulesPages.setPreferredSize(new Dimension(200, 75));
+        buttonPanel.setPreferredSize(new Dimension(300, 75));
+        buttonPanel.add(buttonToStart);
+        buttonPanel.add(rulesPages);
+
+        contentSouth.add(buttonPanel, BorderLayout.SOUTH);
+
         imagePendu.setIndexSet(0);
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
@@ -49,7 +59,8 @@ public class HomePage extends JPanel {
     }
     private void createJLabel() {
         //Settings
-        Font fontStyleHomePage = new Font("Chalkboard", Font.LAYOUT_LEFT_TO_RIGHT, 25);
+        Font fontStyleHomePage = new Font("Phosphate", Font.LAYOUT_LEFT_TO_RIGHT, 25);
+        Font fontStyleTextPage = new Font("Chalkboard", Font.LAYOUT_LEFT_TO_RIGHT, 25);
         Border borderStyleHomePage = BorderFactory.createEtchedBorder(Color.lightGray, Color.ORANGE);
         //Title
         title.setVerticalAlignment(JLabel.CENTER);
@@ -62,7 +73,7 @@ public class HomePage extends JPanel {
         textSouth.setAlignmentX(JLabel.CENTER);
         textSouth.setHorizontalAlignment(JLabel.CENTER);
         textSouth.setPreferredSize(new Dimension(700, 300));
-        textSouth.setFont(fontStyleHomePage);
+        textSouth.setFont(fontStyleTextPage);
         textSouth.setText("<html>Vous avez 7 coups pour trouver le mot caché! et si vous réussisez... et bien on recommence !<br /> Plus vous trouvé de mot, plus votre score grandira !! Alors à vous de jouer.<br /> Proverbe : \t\"Pas vue, pas pris! <br />\t Pris! PENDU !!!</html>");
         Border border = textSouth.getBorder();
         Border margin = new EmptyBorder(10,50,10,50);
@@ -72,6 +83,11 @@ public class HomePage extends JPanel {
         buttonToStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 navigation.setPage(2);
+            }
+        });
+        rulesPages.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(1);
             }
         });
     }

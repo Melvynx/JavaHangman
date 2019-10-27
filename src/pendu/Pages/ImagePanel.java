@@ -23,7 +23,6 @@ public class ImagePanel extends JPanel {
         int x = (this.getWidth() - image[indexSet].getWidth(null)) / 2;
         int y = (this.getHeight() - image[indexSet].getHeight(null)) / 2;
         g2d.drawImage(image[indexSet], x, y, null);
-        System.out.println("Paint picture :"+image[indexSet].getSource());
     }
 
     public void setIndexSet(Integer indexSet) {

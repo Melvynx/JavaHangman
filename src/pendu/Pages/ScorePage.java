@@ -12,13 +12,14 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class ScorePage extends JPanel {
-    ImagePanel penduImage = new ImagePanel();
-    JLabel[] topScore = new JLabel[10];
-    JPanel contentTopScore = new JPanel(new GridLayout(10,1));
-    JPanel contentImage = new JPanel(new BorderLayout());
-    JPanel content = new JPanel(new GridLayout(1,2));
-    LinkedList<UserSaveScore> savedScore = new LinkedList<>();
-    JButton restart = new JButton("Rejouer !");
+    private ImagePanel penduImage = new ImagePanel();
+    private JLabel[] topScore = new JLabel[10];
+    private JPanel contentTopScore = new JPanel(new GridLayout(10,1));
+    private JPanel contentImage = new JPanel(new BorderLayout());
+    private JPanel content = new JPanel(new GridLayout(1,2));
+    private LinkedList<UserSaveScore> savedScore = new LinkedList<>();
+    private JButton restart = new JButton("Rejouer !");
+    private JButton homePage = new JButton("Aller à la homePage");
 
     public ScorePage(Navigation navigation) {
         tryGetScore();
@@ -40,8 +41,17 @@ public class ScorePage extends JPanel {
                 navigation.setPage(2);
             }
         });
+        homePage.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                navigation.setPage(0);
+            }
+        });
         contentImage.add(penduImage, BorderLayout.CENTER);
-        contentImage.add(restart, BorderLayout.SOUTH);
+        JPanel contentButton = new JPanel();
+        contentButton.add(restart);
+        contentButton.add(homePage);
+        contentButton.setPreferredSize(new Dimension(200, 50));
+        contentImage.add(contentButton, BorderLayout.SOUTH);
         contentTopScore.setPreferredSize(new Dimension(400,600));
         content.add(contentTopScore);
         content.add(contentImage);
@@ -58,7 +68,6 @@ public class ScorePage extends JPanel {
         {
             lecteurAvecBuffer = new BufferedReader(new FileReader(new File("file/score.txt")));
             while ((ligne = lecteurAvecBuffer.readLine()) != null){
-                System.out.println(ligne);
                 String[] ligneTab = ligne.split(":");
                 String name = ligneTab[0];
                 int score = Integer.parseInt(ligneTab[1]);

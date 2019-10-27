@@ -3,22 +3,21 @@ package pendu;
 import pendu.Pages.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class Window extends JFrame implements Navigation {
 
-    JMenuBar menuBar = new JMenuBar();
-    JMenu fillMenu = new JMenu("Fichier"), aboutMenu = new JMenu("A propos");
-    JMenuItem newMenu = new JMenuItem("Nouveau"), scoreMenu = new JMenuItem("Score"), rulesMenu = new JMenuItem("Règle"), aboutItemMenu = new JMenuItem("A propos");
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu fillMenu = new JMenu("Fichier"), aboutMenu = new JMenu("A propos");
+    private JMenuItem newGame = new JMenuItem("Nouveau"), scoreMenu = new JMenuItem("Score"), rulesMenu = new JMenuItem("Règle"), aboutItemMenu = new JMenuItem("A propos");
 
-    int pointPlayer = 10;
+    private int pointPlayer = 0;
 
-    HomePage homePage = new HomePage(this);
-    RulesPages rulesPages = new RulesPages(this);
-    GamePage gamePage = new GamePage(this);
-    ScorePage scorePage = new ScorePage(this);
+    private HomePage homePage = new HomePage(this);
 
     Window() {
 
@@ -30,14 +29,14 @@ public class Window extends JFrame implements Navigation {
 
 
         initBar();
-        this.setContentPane(gamePage);
+        this.setContentPane(homePage);
         this.setVisible(true);
         /*this.getContentPane().removeAll();
         this.setContentPane(rulesPages);
         this.getContentPane().revalidate();*/
     }
     public void initBar() {
-        fillMenu.add(newMenu);
+        fillMenu.add(newGame);
         fillMenu.add(scoreMenu);
         fillMenu.add(rulesMenu);
 
@@ -51,26 +50,35 @@ public class Window extends JFrame implements Navigation {
                 setPage(0);
             }
         });
-        newMenu.addActionListener(new ActionListener() {
+        aboutItemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        newGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setPage(2);
             }
         });
+        newGame.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         rulesMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setPage(1);
             }
         });
+        rulesMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         scoreMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setPage(3);
             }
         });
+        rulesMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
         this.setJMenuBar(menuBar);
     }
     public void setPage(int pages) {
         this.getContentPane().removeAll();
+
+        RulesPages rulesPages;
+        GamePage gamePage;
+        ScorePage scorePage;
+
         switch (pages) {
             case 0:
                 homePage = new HomePage(this);
