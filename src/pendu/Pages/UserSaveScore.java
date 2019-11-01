@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class UserSaveScore implements Serializable {
     private String name;
     private int score;
-    public UserSaveScore(String name, int score) {
+    UserSaveScore(String name, int score) {
         this.name = name;
         this.score = score;
     }
@@ -15,10 +15,10 @@ public class UserSaveScore implements Serializable {
         return this.name+" à eu "+this.score+" point !";
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
-    public String getName() {
+    String getName() {
         return name;
     }
 }

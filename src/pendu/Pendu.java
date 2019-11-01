@@ -1,9 +1,7 @@
 package pendu;
 
-import java.io.IOException;
-
 public class Pendu {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //Placement de la ToolBar dans le menu Apple
         try {
             System.setProperty( "com.apple.mrj.application.apple.menu.about.name", "Ted" );
@@ -12,5 +10,6 @@ public class Pendu {
         } catch ( SecurityException e ) {/*Nothing*/}
         //Lancement de la page principal
         Window win = new Window();
+        win.setPage(0);
     }
 }

@@ -4,10 +4,7 @@ import pendu.Pages.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class Window extends JFrame implements Navigation {
 
@@ -22,8 +19,9 @@ public class Window extends JFrame implements Navigation {
     Window() {
 
         this.setTitle("PENDU");
-        this.setSize(1000, 800);
+        this.setSize(1000, 750);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
 
 
@@ -31,11 +29,8 @@ public class Window extends JFrame implements Navigation {
         initBar();
         this.setContentPane(homePage);
         this.setVisible(true);
-        /*this.getContentPane().removeAll();
-        this.setContentPane(rulesPages);
-        this.getContentPane().revalidate();*/
     }
-    public void initBar() {
+    private void initBar() {
         fillMenu.add(newGame);
         fillMenu.add(scoreMenu);
         fillMenu.add(rulesMenu);
@@ -45,29 +40,16 @@ public class Window extends JFrame implements Navigation {
         menuBar.add(fillMenu);
         menuBar.add(aboutMenu);
 
-        aboutItemMenu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setPage(0);
-            }
-        });
+        aboutItemMenu.addActionListener(e -> setPage(0));
         aboutItemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        newGame.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setPage(2);
-            }
-        });
+
+        newGame.addActionListener(e -> setPage(2));
         newGame.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        rulesMenu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setPage(1);
-            }
-        });
+
+        rulesMenu.addActionListener(e -> setPage(1));
         rulesMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        scoreMenu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setPage(3);
-            }
-        });
+
+        scoreMenu.addActionListener(e -> setPage(3));
         rulesMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
         this.setJMenuBar(menuBar);

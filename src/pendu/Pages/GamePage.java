@@ -1,7 +1,6 @@
 package pendu.Pages;
 
 import pendu.Navigation;
-import sun.awt.image.ImageWatched;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.security.Principal;
 import java.util.LinkedList;
 
 public class GamePage extends JPanel {
@@ -39,67 +34,58 @@ public class GamePage extends JPanel {
     private LinkedList<Character> randomWord = new LinkedList<>();
     private LinkedList<Character> randomLetterFind = new LinkedList<>();
 
-    private JPanel component = new JPanel();
     private JPanel componentWord = new JPanel();
     private JPanel componentLetters = new JPanel();
     private JPanel componentImage = new JPanel(new BorderLayout());
 
     private Integer counterTry = 0;
 
-    boolean gameFinish = false;
+    private boolean gameFinish = false;
 
     private String nameUser = "";
     private int scoreUser = 0;
     private int pointPlayer = 0;
 
     public GamePage(Navigation navigation) {
-        countScoreLabel.setText("Votre score actuel est de :"+ navigation.getPointPlayer());
+        countScoreLabel.setText("Votre score actuel est de : "+ navigation.getPointPlayer());
         initComponent();
         initRandomWord();
+        JPanel component = new JPanel();
         component.setLayout(new GridLayout(1, 2));
         component.add(componentWord, BorderLayout.CENTER);
         component.add(componentImage, BorderLayout.EAST);
         this.add(component);
 
-        scorePageButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                navigation.setPage(3);
-                navigation.resetPointPlay();
-            }
+        scorePageButton.addActionListener(e -> {
+            navigation.setPage(3);
+            navigation.resetPointPlay();
         });
-        restartButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                navigation.setPage(2);
-            }
-        });
-        stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane optionToStop = new JOptionPane();
-                int option = optionToStop.showOptionDialog(null, "Voulez-vous vraiment arrêter votre partie ?", "Arrêt de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-                if (option == JOptionPane.YES_OPTION){
-                    System.out.println(pointPlayer);
-                    if (scoreUser > 1){
-                        partieFinish();
-                        scorePageButton.setVisible(true);
-                        homePage.setVisible(true);
-                        navigation.resetPointPlay();
-                    } else {
-                        navigation.setPage(0);
-                    }
+        homePage.addActionListener(e -> navigation.setPage(0));
+        restartButton.addActionListener(e -> navigation.setPage(2));
+        stopButton.addActionListener(e -> {
+            int option = JOptionPane.showOptionDialog(null, "Voulez-vous vraiment arrêter votre partie ?", "Arrêt de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (option == JOptionPane.YES_OPTION){
+                System.out.println(pointPlayer);
+                scoreUser = navigation.getPointPlayer();
+                if (scoreUser > 1){
+                    partieFinish();
+                    scorePageButton.setVisible(true);
+                    homePage.setVisible(true);
+                    navigation.resetPointPlay();
+                } else {
+                    navigation.setPage(0);
                 }
             }
         });
-        savePoint.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                navigation.addPointPlayer(pointPlayer);
-                System.out.println(navigation.getPointPlayer());
-                scoreUser = navigation.getPointPlayer();
-            }
+        savePoint.addActionListener(e -> {
+            navigation.addPointPlayer(pointPlayer);
+            System.out.println(navigation.getPointPlayer());
+            scoreUser = navigation.getPointPlayer();
         });
         scoreUser = navigation.getPointPlayer();
     }
 
-    public void initComponent() {
+    private void initComponent() {
         penduImage.setIndexSet(imageChoose);
         componentImage.add(penduImage, BorderLayout.CENTER);
         JPanel componentButton = new JPanel(new GridLayout(1,2));
@@ -120,9 +106,6 @@ public class GamePage extends JPanel {
             buttonsLetters[i].setPreferredSize(dimButtonLetter);
             buttonsLetters[i].addActionListener(new ButtonLettersListener(lettersOfButton[i].toLowerCase().charAt(0)));
             buttonsLetters[i].setEnabled(true);
-            //itemLetters[i] = new JMenuItem(lettersOfButton[i]);
-            //itemLetters[i].addActionListener(new ButtonLettersListener());
-            //itemLetters[i].setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.SHIFT_MASK));
             if (i == 21) {
                 JPanel panVide = new JPanel();
                 componentLetters.add(panVide);
@@ -131,32 +114,26 @@ public class GamePage extends JPanel {
                 componentLetters.add(buttonsLetters[i]);
             }
         }
+        //Set keybord event
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
-                .addKeyEventDispatcher(new KeyEventDispatcher() {
-                    @Override
-                    public boolean dispatchKeyEvent(KeyEvent e) {
-                        if(!gameFinish){
-                            if(e.getID() == KeyEvent.KEY_RELEASED){
-                                for(int y = 0; y<lettersOfButton.length; y++){
-                                    if(e.getKeyChar() == lettersOfButton[y].toLowerCase().charAt(0)){
-                                        for(int i = 0; i<buttonsLetters.length; i++){
-                                            if(buttonsLetters[i].getText().toLowerCase().charAt(0) == e.getKeyChar()){
-                                                if(buttonsLetters[i].isEnabled())
-                                                    new ButtonLettersListener(e.getKeyChar()).click();
-
-                                                buttonsLetters[i].setEnabled(false);
-                                            }
+                .addKeyEventDispatcher(e -> {
+                    if(!gameFinish){
+                        if(e.getID() == KeyEvent.KEY_RELEASED){
+                            for (String s : lettersOfButton) {
+                                if (e.getKeyChar() == s.toLowerCase().charAt(0)) {
+                                    for (JButton buttonsLetter : buttonsLetters) {
+                                        if (buttonsLetter.getText().toLowerCase().charAt(0) == e.getKeyChar()) {
+                                            if (buttonsLetter.isEnabled())
+                                                new ButtonLettersListener(e.getKeyChar()).click();
+                                            buttonsLetter.setEnabled(false);
                                         }
-
                                     }
                                 }
                             }
                         }
-                        return false;
                     }
+                    return false;
                 });
-
-
         Font fontInfoLabel = new Font("Chalkboard", Font.ITALIC, 25);
         Font wordToFindFont = new Font("Chalkboard", Font.BOLD, 40);
         countWordLabel.setFont(fontInfoLabel);
@@ -186,27 +163,26 @@ public class GamePage extends JPanel {
 
     }
 
-    public void initRandomWord(){
-        String wordToFindStar = "";
+    private void initRandomWord(){
+        StringBuilder wordToFindStar = new StringBuilder();
         String randomWordGenerate = genereateWord();
         int randomWordLength = randomWordGenerate.length();
 
         for (int i = 0; i < randomWordLength; i++){
-            wordToFindStar+= "-";
+            wordToFindStar.append("-");
             randomWord.add(randomWordGenerate.charAt(i));
             randomLetterFind.add('-');
         }
 
-        wordToFind.setText(wordToFindStar);
+        wordToFind.setText(wordToFindStar.toString());
     }
 
-    public String genereateWord() {
+    private String genereateWord() {
         int randomNumber = (int)(Math.random()*336000);
         String answer = null;
         LineNumberReader dictionnaireText;
         try {
             dictionnaireText = new LineNumberReader(new FileReader(new File("file/dictionnaire.txt")));
-            String s = dictionnaireText.readLine();
             for (int i = 0; i < randomNumber + 1; i++) {
                 dictionnaireText.readLine();
                 if (randomNumber == dictionnaireText.getLineNumber() ) {
@@ -215,8 +191,6 @@ public class GamePage extends JPanel {
 
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -239,7 +213,7 @@ public class GamePage extends JPanel {
 
         }
 
-        public void click() {
+        private void click() {
             char typedChar = letter;
             boolean someoneLetterFind = false;
             boolean gameIsWine = true;
@@ -252,8 +226,8 @@ public class GamePage extends JPanel {
                     someoneLetterFind = true;
                 }
             }
-            for (int y = 0; y<randomLetterFind.size(); y++){
-                newWordToDisplay+=randomLetterFind.get(y);
+            for (Character character : randomLetterFind) {
+                newWordToDisplay += character;
                 wordToFind.setText(newWordToDisplay);
             }
             if (!someoneLetterFind){
@@ -275,26 +249,27 @@ public class GamePage extends JPanel {
                     countMistake.setForeground(Color.red);
                     countMistake.setText("PERDU");
                     //create the correct word
-                    for (int i = 0; i < randomWord.size(); i++)
-                        wordCorrect.append(randomWord.get(i));
+                    for (Character character : randomWord)
+                        wordCorrect.append(character);
                     wordToFind.setText(wordCorrect.toString());
                     //Do false all button
                     for (int i = 0; i<lettersOfButton.length; i++)
                         buttonsLetters[i].setEnabled(false);
-                    
-                    if(scoreUser > 1){
+
+                    if(scoreUser > 1) {
                         getPoint(counterTry);
                         partieFinish();
                     }
-
-
                     scorePageButton.setVisible(true);
                     restartButton.setVisible(true);
+                    homePage.setVisible(true);
                 }
             }
-            for (int i = 0; i<randomLetterFind.size(); i++){
-                if (randomLetterFind.get(i) == '-')
+            for (Character character : randomLetterFind) {
+                if (character == '-') {
                     gameIsWine = false;
+                    break;
+                }
             }
             if(gameIsWine){
                 wordToFind.setForeground(Color.green);
@@ -314,15 +289,29 @@ public class GamePage extends JPanel {
         }
     }
     private void writeNewScore() {
+        System.out.println("Writing");
+        if(nameUser == null){
+            System.out.println("Nameuser null");
+            return;
+        }
+        //Try if : is on the word
+        String[] testUser = nameUser.split(":");
+        if (testUser.length > 1){
+            JOptionPane.showMessageDialog(null, "<html>Le pseudo ne doit pas contenir de \" : \".<br/> Impossible de sauvegarder.</html>", "Error syntaxe", JOptionPane.ERROR_MESSAGE);
+            partieFinish();
+            return;
+        }
+        if(nameUser.length() > 50){
+            JOptionPane.showMessageDialog(null, "<html>Le pseudo ne doit pas contenir plus de 50 caractères.</html>", "Error length", JOptionPane.ERROR_MESSAGE);
+            partieFinish();
+            return;
+        }
         try {
-            if (nameUser != null){
-                String formatText = nameUser + ":" + scoreUser+"\n";
-                PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
-                pw.write(formatText);
-                pw.close();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("passed");
+            String formatText = nameUser + ":" + scoreUser+"\n";
+            PrintWriter pw = new PrintWriter(new FileWriter("file/score.txt", true));
+            pw.write(formatText);
+            pw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -331,8 +320,7 @@ public class GamePage extends JPanel {
 
         gameFinish = true;
 
-        JOptionPane answerName = new JOptionPane();
-        nameUser = answerName.showInputDialog(null, "Inscrivez votre pseudo !", "Meilleurs Score", JOptionPane.QUESTION_MESSAGE);
+        nameUser = JOptionPane.showInputDialog(null, "Inscrivez votre pseudo !", "Meilleurs Score", JOptionPane.QUESTION_MESSAGE);
         writeNewScore();
     }
     private void getPoint(Integer countLose){

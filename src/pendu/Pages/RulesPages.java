@@ -7,12 +7,10 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RulesPages extends JPanel {
-    JLabel title = new JLabel();
-    JLabel textCenter = new JLabel();
+    private JLabel title = new JLabel();
+    private JLabel textCenter = new JLabel();
 
 
 
@@ -21,11 +19,17 @@ public class RulesPages extends JPanel {
 
         JButton restartButton = new JButton("Commencez !");
         JButton homePage = new JButton("High score !");
+
         JPanel contentSouth = new JPanel(new GridLayout(1,2));
+
+
+
+
         JPanel buttonPanel = new JPanel();
         restartButton.setPreferredSize(new Dimension(200, 75));
         homePage.setPreferredSize(new Dimension(200, 75));
-        buttonPanel.setPreferredSize(new Dimension(400, 100));
+        buttonPanel.setPreferredSize(new Dimension(300, 100));
+
         buttonPanel.add(restartButton);
         buttonPanel.add(homePage);
 
@@ -37,19 +41,11 @@ public class RulesPages extends JPanel {
         this.add(contentSouth, BorderLayout.SOUTH);
 
 
-        restartButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                navigation.setPage(2);
-            }
-        });
-        homePage.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                navigation.setPage(3);
-            }
-        });
+        restartButton.addActionListener(e -> navigation.setPage(2));
+        homePage.addActionListener(e -> navigation.setPage(3));
     }
-    public void createJLabel() {
-        Font fontStyleText = new Font("Chalkboard", Font.LAYOUT_LEFT_TO_RIGHT, 20);
+    private void createJLabel() {
+        Font fontStyleText = new Font("Chalkboard", Font.PLAIN, 20);
         Font fontStyleTitle = new Font("Chalkboard", Font.BOLD, 40);
         title.setText("Le jeu du PENDU : ");
         title.setHorizontalAlignment(JLabel.CENTER);
