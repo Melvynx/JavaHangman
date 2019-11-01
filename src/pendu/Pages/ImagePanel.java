@@ -7,14 +7,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImagePanel extends JPanel {
-    Image[] image;
-    Integer indexSet = 0;
+    private Image[] image;
+    private Integer indexSet = 0;
 
-    public ImagePanel() {
+    ImagePanel() {
         try {
             image = new Image[]{ImageIO.read(new File("images/initial.jpg")), ImageIO.read(new File("images/try1.jpg")), ImageIO.read(new File("images/try2.jpg")), ImageIO.read(new File("images/try3.jpg")), ImageIO.read(new File("images/try4.jpg")), ImageIO.read(new File("images/try5.jpg")), ImageIO.read(new File("images/try6.jpg")), ImageIO.read(new File("images/try7.jpg")), ImageIO.read(new File("images/try8.jpg")),ImageIO.read(new File("images/lose.png")),ImageIO.read(new File("images/looser.jpeg")),ImageIO.read(new File("images/gagner.png")),};
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
     public void paintComponent(Graphics g) {
@@ -25,7 +25,7 @@ public class ImagePanel extends JPanel {
         g2d.drawImage(image[indexSet], x, y, null);
     }
 
-    public void setIndexSet(Integer indexSet) {
+    void setIndexSet(Integer indexSet) {
         this.indexSet = indexSet;
     }
 }

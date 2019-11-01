@@ -3,13 +3,42 @@
   <component name="ChangeListManager">
     <list default="true" id="4c3668e7-387c-459a-8e9a-5a07cd76f945" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file/dictionnaire.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/dictionnaire.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file/score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file/score.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/gagner.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/gagner.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/looser.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/images/looser.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$ButtonLettersListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage$ButtonLettersListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/GamePage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/HomePage$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/HomePage$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/HomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/HomePage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ImagePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/RulesPages$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/RulesPages$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/RulesPages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/RulesPages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ScorePage$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ScorePage$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ScorePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/ScorePage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/TextPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/userSaveScore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pages/userSaveScore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Pendu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Pendu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendu/pendu/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendu/pendu/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/GamePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ImagePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/RulesPages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/ScorePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/TextPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pages/UserSaveScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pages/UserSaveScore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pendu/Pendu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Pendu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pendu/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pendu/Window.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,6 +56,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Create_Game" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SeWzfgg0mntdmd4qDRjKtPaqas" />
@@ -64,6 +98,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Pendu" />
+        <item itemvalue="Application.Pendu" />
       </list>
     </recent_temporary>
   </component>
@@ -92,16 +127,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/pendu/Pages/GamePage.java</url>
-          <line>266</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
