@@ -6,7 +6,7 @@ Small Hangman 💀 project created in Java.
 
 To learn Java because I had tests on this language 👨‍🎓.
 
-## Installation
+## Installation
 
 Clone the repository, open with `IntelliJ` and run the project.
 
