@@ -4,7 +4,7 @@ Small Hangman 💀 project created in Java.
 
 ## Motivation
 
-To learn Java because I had tests on this language 👨‍🎓.
+To learn Java because I had evalutations on this language 👨‍🎓.
 
 ## Installation
 
